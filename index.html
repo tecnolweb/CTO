@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adicionar Itens</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="card">
+  <h1>POWERNET</h1>
+<h2>Cadastro de Rede Neutra</h2>
+
+<label id="log" for="loginInput">Login do Cliente:</label>
+<input type="text" id="loginInput" placeholder="Login">
+<label for="tagInput">Etiqueta/Porta</label>
+<input type="text" id="tagInput" placeholder="Etiqueta/Porta">
+<label for="selectOption">CTO:</label>
+<select id="selectOption">
+  <option value="Seabant">Seabant</option>
+  <option value="Rede.com">Rede.com</option>
+  <option value="Via Net">Via Net</option>
+</select>
+
+<button onclick="addItem()">Cadastrar</button>
+<a href="view_items.html"><button>Ver Cadastro</button></a>
+</div>
+<script>
+// Função para adicionar item
+function addItem() {
+  var login = document.getElementById("loginInput").value;
+  var tag = document.getElementById("tagInput").value;
+  var option = document.getElementById("selectOption").value;
+  if (login === "" || tag === "") return;
+  
+  var items = getItemsFromStorage();
+  items.push({ login: login, tag: tag, option: option });
+  localStorage.setItem("items", JSON.stringify(items));
+  clearInputs();
+}
+
+// Função para limpar inputs
+function clearInputs() {
+  document.getElementById("loginInput").value = "";
+  document.getElementById("tagInput").value = "";
+  document.getElementById("selectOption").selectedIndex = 0;
+}
+
+// Função para obter itens do Local Storage
+function getItemsFromStorage() {
+  var items = localStorage.getItem("items");
+  return items ? JSON.parse(items) : [];
+}
+</script>
+</body>
+</html>

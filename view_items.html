@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visualizar Itens</title>
+<link rel="stylesheet" href="itens.css">
+</head>
+<body>
+<h1>Itens Adicionados</h1>
+
+
+<!-- Campo de filtro -->
+<input type="text" id="filterInput" onkeyup="filterItems()" placeholder="Filtrar itens">
+<a href="index.html"><button>Voltar</button></a>
+
+<ul id="itemList"></ul>
+
+<script>
+// Função para exibir itens
+function displayItems() {
+  var items = getItemsFromStorage();
+  var list = document.getElementById("itemList");
+  list.innerHTML = "";
+  items.forEach(function(item, index) {
+    var li = document.createElement("li");
+    li.textContent = `LOGIN: ${item.login} , ETIQUETA/PORTA:\n ${item.tag}, CTO: ${item.option}`;
+    
+    var editButton = document.createElement("button");
+    editButton.textContent = "Editar";
+    editButton.onclick = function() {
+      var newLogin = prompt("Editar login:", item.login);
+      var newTag = prompt("Editar etiqueta:", item.tag);
+      var newOption = prompt("Editar opção:", item.option);
+      if (newLogin !== null && newTag !== null && newOption !== null) {
+        items[index].login = newLogin;
+        items[index].tag = newTag;
+        items[index].option = newOption;
+        localStorage.setItem("items", JSON.stringify(items));
+        displayItems();
+      }
+    };
+    
+    var deleteButton = document.createElement("button");
+    deleteButton.textContent = "Excluir";
+    deleteButton.onclick = function() {
+      items.splice(index, 1);
+      localStorage.setItem("items", JSON.stringify(items));
+      displayItems();
+    };
+    
+    li.appendChild(editButton);
+    li.appendChild(deleteButton);
+    list.appendChild(li);
+  });
+}
+
+// Função para obter itens do Local Storage
+function getItemsFromStorage() {
+  var items = localStorage.getItem("items");
+  return items ? JSON.parse(items) : [];
+}
+
+// Exibir itens quando a página é carregada
+displayItems();
+
+// Função para filtrar itens
+function filterItems() {
+  var input, filter, ul, li, item, i, txtValue;
+  input = document.getElementById("filterInput");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("itemList");
+  li = ul.getElementsByTagName("li");
+  for (i = 0; i < li.length; i++) {
+    item = li[i];
+    txtValue = item.textContent || item.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      item.style.display = "";
+    } else {
+      item.style.display = "none";
+    }
+  }
+}
+</script>
+</body>
+</html>
