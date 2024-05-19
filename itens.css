@@ -72,7 +72,7 @@ a {
 }
 
 /* Responsivo */
-@media (max-width: 768px) {
+@media (max-width: 668px) {
   .card {
     width: 80%;
   }
