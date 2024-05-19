@@ -65,7 +65,7 @@ a {
 
 
 /* Responsivo */
-@media (max-width: 668px) {
+@media (max-width: 768px) {
   .card {
     width: 90%;
     
