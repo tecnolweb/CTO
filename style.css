@@ -66,8 +66,8 @@ a {
 /* Responsivo */
 @media (max-width: 768px) {
   .card {
-    width: 90%;
-    text-align: center;
-    align-items: center;
+    width: 80%;
+    
+    
   }
 }
