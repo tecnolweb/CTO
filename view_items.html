@@ -24,7 +24,7 @@ function displayItems() {
   list.innerHTML = "";
   items.forEach(function(item, index) {
     var li = document.createElement("li");
-    li.textContent = `LOGIN: ${item.login} , ETIQUETA/PORTA:\n ${item.tag}, CTO: ${item.option}`;
+    li.textContent = `(LOGIN): ${item.login} , (ETIQUETA/PORTA): ${item.tag}, (CTO): ${item.option}`;
     
     var editButton = document.createElement("button");
     editButton.textContent = "Editar";
