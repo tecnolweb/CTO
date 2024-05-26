@@ -29,6 +29,7 @@ function displayItems() {
     var editButton = document.createElement("button");
     editButton.textContent = "Editar";
     editButton.onclick = function() {
+if(confirm("Editar Este Login?")){
       var newLogin = prompt("Editar login:", item.login);
       var newTag = prompt("Editar etiqueta:", item.tag);
       var newOption = prompt("Editar opção:", item.option);
@@ -38,13 +39,14 @@ function displayItems() {
         items[index].option = newOption;
         localStorage.setItem("items", JSON.stringify(items));
         displayItems();
+     }
       }
     };
     
     var deleteButton = document.createElement("button");
     deleteButton.textContent = "Excluir";
     deleteButton.onclick = function() {
-if (confirm("Você tem certeza que deseja excluir este item?")) {
+if (confirm("Você tem certeza que deseja excluir este Login?")) {
       items.splice(index, 1);
       localStorage.setItem("items", JSON.stringify(items));
       displayItems();
