@@ -44,9 +44,11 @@ function displayItems() {
     var deleteButton = document.createElement("button");
     deleteButton.textContent = "Excluir";
     deleteButton.onclick = function() {
+if (confirm("Você tem certeza que deseja excluir este item?")) {
       items.splice(index, 1);
       localStorage.setItem("items", JSON.stringify(items));
       displayItems();
+    }
     };
     
     li.appendChild(editButton);
